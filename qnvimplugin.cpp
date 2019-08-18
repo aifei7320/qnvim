@@ -180,7 +180,7 @@ QNVimPlugin::~QNVimPlugin() {
 
 QString QNVimPlugin::filename(Core::IEditor *editor) const {
     if (not editor)
-        return "";
+        return QString("");
     QString filename = editor->document()->filePath().toString();
     if (filename.isEmpty())
         filename = editor->document()->displayName();
@@ -675,7 +675,7 @@ void QNVimPlugin::editorOpened(Core::IEditor *editor) {
 
 
     ProjectExplorer::Project *project = ProjectExplorer::SessionManager::projectForFile(
-            Utils::FileName::fromString(filename));
+            Utils::FilePath::fromString(filename));
     if (project) {
         QString projectDirectory = project->projectDirectory().toString();
         if (not projectDirectory.isEmpty())
@@ -874,13 +874,13 @@ void QNVimPlugin::handleNotification(const QByteArray &name, const QVariantList 
                                 editor = Core::EditorManager::openEditorWithContents("Terminal", &filename, QByteArray(), filename);
                             else if (bufferType == "help") {
                                 editor = Core::EditorManager::openEditorWithContents("Help", &filename, QByteArray(), "vim://help");
-                                editor->document()->setFilePath(Utils::FileName::fromString(filename));
+                                editor->document()->setFilePath(Utils::FilePath::fromString(filename));
                                 editor->document()->setPreferredDisplayName("Vim Help");
                                 editor->document()->setTemporary(true);
                             }
                             else if (bufferType == "nowrite" or bufferType == "nofile") {
                                 editor = Core::EditorManager::openEditorWithContents("Help", &filename, QByteArray(), "vim://help");
-                                editor->document()->setFilePath(Utils::FileName::fromString(filename));
+                                editor->document()->setFilePath(Utils::FilePath::fromString(filename));
                                 editor->document()->setPreferredDisplayName(filename);
                                 editor->document()->setTemporary(true);
                             }

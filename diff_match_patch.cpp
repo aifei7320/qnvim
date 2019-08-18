@@ -48,11 +48,11 @@ Diff::Diff() {
 QString Diff::strOperation(Operation op) {
     switch (op) {
         case INSERT:
-            return "INSERT";
+            return QString("INSERT");
         case DELETE:
-            return "DELETE";
+            return QString("DELETE");
         case EQUAL:
-            return "EQUAL";
+            return QString("EQUAL");
     }
     throw "Invalid operation.";
 }
